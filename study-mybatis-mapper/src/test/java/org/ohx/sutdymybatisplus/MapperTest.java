@@ -1,7 +1,7 @@
-package com.example.study;
+package org.ohx.sutdymybatisplus;
 
-import com.example.study.dao.EmployeeDao;
-import com.example.study.entity.Employee;
+import org.ohx.sutdymybatisplus.dal.mapper.EmployeeDao;
+import org.ohx.sutdymybatisplus.dal.model.dataobject.Employee;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

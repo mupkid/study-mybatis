@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date 2022/5/10
  */
 @SpringBootTest
-public class MabatisPlusSelectTest {
+public class SelectTest {
     @Autowired
     private UserMapper userMapper;
 

@@ -1,4 +1,4 @@
-package com.example.study.entity;
+package org.ohx.sutdymybatisplus.dal.model.dataobject;
 
 import io.mybatis.provider.Entity;
 import lombok.Data;
