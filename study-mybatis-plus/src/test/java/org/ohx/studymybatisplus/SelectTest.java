@@ -48,4 +48,13 @@ public class SelectTest {
         List<User> users = userMapper.selectByMap(map);
         users.forEach(System.out::println);
     }
+
+    /**
+     * 自定义方法测试
+     */
+    @Test
+    public void testSelectMapById() {
+        Map<String, Object> map = userMapper.selectMapById(1L);
+        System.out.println(map);
+    }
 }
