@@ -1,5 +1,7 @@
 package org.ohx.studymybatisplus.dal.model.dataobject;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
 
 /**
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
  */
 public class User {
 
+    @TableId
     private Long id;
 
     private String username;
