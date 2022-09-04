@@ -12,7 +12,6 @@ import java.util.Map;
  * @author mudkip
  * @date 2022/5/9
  */
-@Mapper
 public interface UserMapper extends BaseMapper<User> {
     Map<String, Object> selectMapById(Long id);
 }

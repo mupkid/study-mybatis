@@ -2,6 +2,7 @@ package org.ohx.studymybatisplus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 启动类
@@ -12,8 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MyBatisPlusApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MyBatisPlusApplication.class, args);
+        ConfigurableApplicationContext run = SpringApplication.run(MyBatisPlusApplication.class, args);
 
-
+        String[] beanDefinitionNames = run.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
     }
 }

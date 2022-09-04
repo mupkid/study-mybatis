@@ -116,26 +116,37 @@ public class GlobalConfig implements Serializable {
 
 那就知道了，如果不配置，那么就会默认使用`IdType.ASSIGN_ID`作为主键策略，即雪花算法。
 
-再看 mybatis-plus 的 starter 包中源码，可以发现看到一个名为`IdentifierGeneratorAutoConfiguration`的类。
+在 MybatisSqlSessionFactoryBuilder#build 中给 GlobalConfigUtils 创建默认的 ID 生成器。
 
 ```java
-@Lazy
-@Configuration(proxyBeanMethods = false)
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-public class IdentifierGeneratorAutoConfiguration {
-    @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(InetUtils.class)
-    public static class InetUtilsAutoConfig {
-        @Bean
-        @ConditionalOnMissingBean
-        public IdentifierGenerator identifierGenerator(InetUtils inetUtils) {
-            return new DefaultIdentifierGenerator(inetUtils.findFirstNonLoopbackAddress());
+public class MybatisSqlSessionFactoryBuilder extends SqlSessionFactoryBuilder {
+    @Override
+    public SqlSessionFactory build(Configuration configuration) {
+        GlobalConfig globalConfig = GlobalConfigUtils.getGlobalConfig(configuration);
+
+        final IdentifierGenerator identifierGenerator;
+        if (null == globalConfig.getIdentifierGenerator()) {
+            identifierGenerator = new DefaultIdentifierGenerator();
+            globalConfig.setIdentifierGenerator(identifierGenerator);
+        } else {
+            identifierGenerator = globalConfig.getIdentifierGenerator();
         }
+        IdWorker.setIdentifierGenerator(identifierGenerator);
+        ...
+        return sqlSessionFactory;
     }
 }
 ```
 
-如果用户没有自定义 ID 生成器，那么会返回`DefaultIdentifierGenerator`作为默认的 ID 生成器。
+在`DefaultIdentifierGenerator`中，最核心的方法是`nextId()`，内部是调用了`Sequence#nextId()`方法，这个 Sequence 又是涉及到[别的项目](https://gitee.com/yu120/sequence)了，方法中就是生成雪花 ID 的算法。
+
+在`MybatisParameterHandler#populateKeys`中会判断主键生成策略，如果是 ASSIGN 的，就会调用`DefaultIdentifierGenerator`获取雪花 ID并加到实例的主键字段上。
+
+### @TableField
+
+### @TableLogic
+
+指明表字段是逻辑删除字段。默认 0 表示未删除，1 表示已删除。
 
 ## CRUD 接口
 
@@ -143,5 +154,16 @@ public class IdentifierGeneratorAutoConfiguration {
 
 ### DAO CRUD
 
+## 条件构造器
 
+* Wrapper：条件构造器抽象类。最顶层父类。
+  * AbstractWrapper：查询条件封装，生成 SQL 的 where 条件。
+    * QueryWrapper：查询条件封装。
+    * UpdateWrapper：更新条件封装
+    * AbstractLambdaWrapper：使用 Lambda 语法。
+      * LambdaQueryWrapper：用于使用 Lambda 语法查询 Wrapper
+      * LambdaUpdateWrapper：更新封装 Wrapper
 
+# 分页插件
+
+MyBatis-Plus 自带分页插件，只需要简单的配置即可实现分页功能。
