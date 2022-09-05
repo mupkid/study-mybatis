@@ -164,7 +164,7 @@ public class MybatisSqlSessionFactoryBuilder extends SqlSessionFactoryBuilder {
       * LambdaQueryWrapper：用于使用 Lambda 语法查询 Wrapper
       * LambdaUpdateWrapper：更新封装 Wrapper
 
-# 分页插件
+## 分页插件
 
 MyBatis-Plus 自带分页插件，只需要简单的配置即可实现分页功能。
 
@@ -210,7 +210,7 @@ List<User> pageUserOverAge(@Param("page") IPage<User> page, @Param("age") Intege
 
 推荐第一个参数是 IPage，具体理由没找到，说是自定义的 IPage 实现类如果不放第一会有问题，没测试过不确定。
 
-# 乐观锁插件
+## 乐观锁插件
 
 乐观锁实现方式：
 
@@ -244,7 +244,7 @@ private Integer version;
 
 然后正常使用即可。
 
-# 通用枚举
+## 通用枚举
 
 经常有这么的场景：数据有些属性只有特定的值，我们在代码中会使用枚举来提高可读性，但是在数据库中却是以整型的方式存储。那么就经常要对枚举进行转换，相当繁琐。
 
@@ -289,5 +289,70 @@ mybatis-plus:
 
 二是修改 MyBatis 使用的`EnumTypeHandler`，看不懂不写了。
 
+## 代码生成器
+
+[项目地址]([baomidou/generator: Any Code generator (github.com)](https://github.com/baomidou/generator))
 
 
+
+## 多数据源
+
+> 这是一个第三方 mybatis 扩展库，与 mybatis-plus 本身无关，属于组织参与者小锅盖个人发起的项目，任何行为与 baomidou 组织其它成员无关。
+
+[项目地址](https://github.com/baomidou/dynamic-datasource-spring-boot-starter)
+
+[项目文档](https://www.kancloud.cn/tracy5546/dynamic-datasource/2264611)
+
+支持场景：纯粹多库、读写分离、一主多从、混合模式
+
+1. 引入依赖
+
+```xml
+<dependency>
+  <groupId>com.baomidou</groupId>
+  <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+2. 配置数据源
+
+```properties
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          url: jdbc:mysql://xx.xx.xx.xx:3306/dynamic
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+        slave_1:
+          url: jdbc:mysql://xx.xx.xx.xx:3307/dynamic
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+        slave_2:
+          url: ENC(xxxxx) # 内置加密,使用请查看详细文档
+          username: ENC(xxxxx)
+          password: ENC(xxxxx)
+          driver-class-name: com.mysql.jdbc.Driver
+       #......省略
+       #以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+```
+
+3. 使用`@DS`注解切换数据源
+
+`@DS`可以作用在方法上和类上，同时存在就近原则。
+
+
+
+## MyBatisX
+
+MyBatisX 是一个 IDEA 的插件。
+
+[项目地址](https://gitee.com/baomidou/MybatisX)
+
+[MyBatisCodeHelper-Pro的文档](http://118.24.53.162/#/README)

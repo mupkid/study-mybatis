@@ -2,6 +2,7 @@ package org.ohx.studymybatisplus.dal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.ohx.studymybatisplus.dal.model.dataobject.UserDO;
@@ -17,7 +18,8 @@ import java.util.Map;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<UserDO> {
-    Map<String, UserDO> getMapById(Long id);
+    @MapKey("id")
+    Map<String, UserDO> getMapById(@Param("id") Long id);
 
     IPage<UserDO> pageUserOverAge(@Param("page") IPage<UserDO> page, @Param("age") Integer age);
 
