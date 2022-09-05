@@ -1,6 +1,7 @@
 package org.ohx.studymybatisplus;
 
 import org.junit.jupiter.api.Test;
+import org.ohx.studymybatisplus.dal.common.enums.SexEnum;
 import org.ohx.studymybatisplus.dal.mapper.UserMapper;
 import org.ohx.studymybatisplus.dal.model.dataobject.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,12 @@ public class InsertTest {
     private UserMapper userMapper;
 
     @Test
-    public void testSelectList() {
+    public void testInsert() {
         UserDO user = new UserDO();
-        user.setUsername("李四");
+        user.setUsername("geats");
         user.setPassword("123456");
-        user.setAge(23);
+        user.setAge(25);
+        user.setSex(SexEnum.MALE);
 
         int result = userMapper.insert(user);
         System.out.println("Result: " + result);

@@ -243,3 +243,51 @@ private Integer version;
 ```
 
 然后正常使用即可。
+
+# 通用枚举
+
+经常有这么的场景：数据有些属性只有特定的值，我们在代码中会使用枚举来提高可读性，但是在数据库中却是以整型的方式存储。那么就经常要对枚举进行转换，相当繁琐。
+
+对此 MyBatis 本身也有对应的一套方案，但是配置起来比较繁琐。
+
+MyBatis-Plus 就对这套方案进行了封装，提供了更简洁优雅的方式去转换枚举属性。
+
+第一步，有两种方式，一是使用`@EnumValue`注解枚举属性。
+
+```java
+@Getter
+public enum SexEnum {
+    MALE(1, "男"),
+    FEMALE(2, "女");
+
+    // @EnumValue 表示数据库存的值
+    @EnumValue
+    private final Integer sex;
+    private final String sexName;
+
+    SexEnum(Integer sex, String sexName) {
+        this.sex = sex;
+        this.sexName = sexName;
+    }
+}
+```
+
+或者，令枚举属性实现`IEnum`接口，没必要，不写了。
+
+然后把 DO 中对应的属性直接改成枚举类。
+
+第二步，扫描通用枚举（3.5.2 版本后，这一步不需要再配置，所以赶快升级），也有两种方式。
+
+一是指定枚举类包路径扫描。那么将使用`MybatisEnumTypeHandler`进行扫描。
+
+```properties
+mybatis-plus:
+    # 支持统配符 * 或者 ; 分割
+    typeEnumsPackage: com.baomidou.springboot.entity.enums
+  ....
+```
+
+二是修改 MyBatis 使用的`EnumTypeHandler`，看不懂不写了。
+
+
+
