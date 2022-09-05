@@ -3,6 +3,7 @@ package org.ohx.studymybatisplus.dal.model.dataobject;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
 import lombok.ToString;
 
@@ -37,4 +38,7 @@ public class User {
     @TableField("is_deleted")
     @TableLogic
     private Integer deleted;
+
+    @Version
+    private Integer version;
 }

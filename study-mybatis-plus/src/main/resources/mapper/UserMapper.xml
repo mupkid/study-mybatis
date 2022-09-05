@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ohx.studymybatisplus.dal.mapper.UserMapper">
-    <select id="selectMapById" resultType="java.util.Map">
+    <select id="getMapById" resultType="java.util.Map">
         select id,
                username,
                password,
@@ -14,5 +14,21 @@
                update_time
         from user
         where id = #{id}
+    </select>
+
+    <select id="pageUserOverAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.User">
+        select id,
+               username,
+               age
+        from user
+        where age &gt; #{age}
+    </select>
+
+    <select id="pageUserBelowAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.User">
+        select id,
+               username,
+               age
+        from user
+        where age &lt; #{age}
     </select>
 </mapper>

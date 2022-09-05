@@ -54,7 +54,7 @@ public class SelectTest {
      */
     @Test
     public void testSelectMapById() {
-        Map<String, Object> map = userMapper.selectMapById(1L);
+        Map<String, User> map = userMapper.getMapById(1L);
         System.out.println(map);
     }
 }

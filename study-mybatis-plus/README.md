@@ -167,3 +167,79 @@ public class MybatisSqlSessionFactoryBuilder extends SqlSessionFactoryBuilder {
 # 分页插件
 
 MyBatis-Plus 自带分页插件，只需要简单的配置即可实现分页功能。
+
+添加配置类
+
+```java
+@Configuration
+@MapperScan("org/ohx/studymybatisplus/dal/mapper")
+public class MyBatisPlusConfig {
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+
+        return interceptor;
+    }
+}
+```
+
+分页查询有两种方式，一是调用 BaseMapper#selectPage 来分页。
+
+```java
+Page<User> userPage = userMapper.selectPage(new Page<>(1, 3), null);
+```
+
+二是自定义方法分页。XML 中的 SQL 正常写，要改的只有接口定义上。
+
+```java
+IPage<User> pageUserOverAge(@Param("page") IPage<User> page, @Param("age") Integer age);
+```
+
+如果返回类型是 IPage 则入参的 IPage 不能为 null，因为返回的 IPage 等于入参的 IPage。
+
+如果想临时不分页，可以在初始化 IPage 时令 size < 0。
+
+还可以这样
+
+```
+List<User> pageUserOverAge(@Param("page") IPage<User> page, @Param("age") Integer age);
+```
+
+如果返回类型是 List 则入场可以为 null，为 null 就不分页。但官网说需要自行设置 Page 中的 Records 属性（即返回的 List）？什么意思没看懂。
+
+推荐第一个参数是 IPage，具体理由没找到，说是自定义的 IPage 实现类如果不放第一会有问题，没测试过不确定。
+
+# 乐观锁插件
+
+乐观锁实现方式：
+
+1. 取出记录时，获取记录的 version 字段，称 oldVersion。
+
+2. 更新记录时，用 oldVersion 作为条件，把 version 修改为 newVersion，即执行`set version = newVersion where version = oldVersion`。
+3. 那么如果 version 不一致的话，更新就会失败。
+
+配置过程，在配置类中加上乐观锁插件。
+
+```java
+@Configuration
+@MapperScan("org/ohx/studymybatisplus/dal/mapper")
+public class MyBatisPlusConfig {
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        
+        return interceptor;
+    }
+}
+```
+
+表和实体类肯定也得有一个 version 字段。
+
+```java
+@Version
+private Integer version;
+```
+
+然后正常使用即可。
