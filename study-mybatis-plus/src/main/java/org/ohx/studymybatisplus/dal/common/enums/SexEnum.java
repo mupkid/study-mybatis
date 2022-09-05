@@ -21,8 +21,8 @@ public enum SexEnum {
     FEMALE(2, "女");
 
     @EnumValue
-    private Integer sex;
-    private String sexName;
+    private final Integer sex;
+    private final String sexName;
 
     SexEnum(Integer sex, String sexName) {
         this.sex = sex;
