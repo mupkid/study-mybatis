@@ -1,4 +1,4 @@
-package org.ohx.studymybatisplus.biz.service.config;
+package org.ohx.studymybatisplus.dal.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
