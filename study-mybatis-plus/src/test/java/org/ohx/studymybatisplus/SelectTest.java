@@ -2,7 +2,7 @@ package org.ohx.studymybatisplus;
 
 import org.junit.jupiter.api.Test;
 import org.ohx.studymybatisplus.dal.mapper.UserMapper;
-import org.ohx.studymybatisplus.dal.model.dataobject.User;
+import org.ohx.studymybatisplus.dal.model.dataobject.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,14 +29,14 @@ public class SelectTest {
 
     @Test
     public void testSelectById() {
-        User user = userMapper.selectById(1L);
+        UserDO user = userMapper.selectById(1L);
         System.out.println(user);
     }
 
     @Test
     public void testSelectBatchIds() {
         List<Long> list = Arrays.asList(1L, 2L, 3L);
-        List<User> users = userMapper.selectBatchIds(list);
+        List<UserDO> users = userMapper.selectBatchIds(list);
         users.forEach(System.out::println);
     }
 
@@ -45,7 +45,7 @@ public class SelectTest {
         Map<String, Object> map = new HashMap<>();
         map.put("username", "Zhangsan");
         map.put("age", 20);
-        List<User> users = userMapper.selectByMap(map);
+        List<UserDO> users = userMapper.selectByMap(map);
         users.forEach(System.out::println);
     }
 
@@ -54,7 +54,7 @@ public class SelectTest {
      */
     @Test
     public void testSelectMapById() {
-        Map<String, User> map = userMapper.getMapById(1L);
+        Map<String, UserDO> map = userMapper.getMapById(1L);
         System.out.println(map);
     }
 }

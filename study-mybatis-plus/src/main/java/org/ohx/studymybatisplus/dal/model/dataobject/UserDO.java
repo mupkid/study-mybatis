@@ -1,11 +1,8 @@
 package org.ohx.studymybatisplus.dal.model.dataobject;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
-import lombok.ToString;
+import org.ohx.studymybatisplus.dal.common.enums.SexEnum;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +13,8 @@ import java.time.LocalDateTime;
  * @date 2022/5/9
  */
 @Data
-public class User {
+@TableName("user")
+public class UserDO {
 
     @TableId
     private Long id;
@@ -26,6 +24,8 @@ public class User {
     private String password;
 
     private Integer age;
+
+    private SexEnum sex;
 
     private String mobile;
 

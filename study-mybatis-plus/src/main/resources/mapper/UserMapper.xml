@@ -16,7 +16,7 @@
         where id = #{id}
     </select>
 
-    <select id="pageUserOverAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.User">
+    <select id="pageUserOverAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.UserDO">
         select id,
                username,
                age
@@ -24,7 +24,7 @@
         where age &gt; #{age}
     </select>
 
-    <select id="pageUserBelowAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.User">
+    <select id="pageUserBelowAge" resultType="org.ohx.studymybatisplus.dal.model.dataobject.UserDO">
         select id,
                username,
                age
