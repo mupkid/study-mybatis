@@ -69,9 +69,11 @@ SqlSession 关闭之后，一级缓存中的数据会写入二级缓存。
 
 [mybatis-ehcache 文档](https://mybatis.org/ehcache-cache/index.html)
 
+了解就好，一般不用。
+
 只能代替二级缓存，不能代替一级缓存。
 
-了解就好，一般不用。
+使用 EHCache 需要使用 SLF4J。
 
 EHCache 配置说明。
 
@@ -88,3 +90,25 @@ EHCache 配置说明。
 | diskExpiryThreadIntervalSeconds | 否       | 磁盘缓存的清理线程运行间隔，默认是120秒。每 个120s， 相应的线程会进行一次EhCache中数据的 清理工作 |
 | memoryStoreEvictionPolicy       | 否       | 当内存缓存达到最大，有新的element加入的时 候， 移除缓存中element的策略。 默认是LRU（最 近最少使用），可选的有LFU（最不常使用）和 FIFO（先进先出） |
 
+## 分页插件
+
+MyBatis 没有提供自带的分页 API，所以是引入第三方包的。
+
+```xml
+<!-- 引入 Maven 依赖 -->
+<dependency>
+  <groupId>com.github.pagehelper</groupId>
+  <artifactId>pagehelper</artifactId>
+  <version>5.3.1</version>
+</dependency>
+```
+
+在 mybatis-config.xml 文件中引入插件
+
+```xml
+
+<plugins>
+  <!--设置分页插件-->
+  <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+</plugins>
+```

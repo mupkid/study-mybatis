@@ -17,6 +17,11 @@
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
 
+    <plugins>
+        <!--设置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
     <!-- environments：配置多个数据库连接的环境
          属性：default：设置默认使用的环境的 id
     -->
