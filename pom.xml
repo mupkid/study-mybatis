@@ -12,11 +12,14 @@
         <module>study-mybatis-plus</module>
         <module>study-mybatis-mapper</module>
         <module>study-mybatis-base</module>
+        <module>study-mybatis-spring</module>
+        <module>study-mybatis-springboot</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mybatis.version>3.5.10</mybatis.version>
         <spring.boot.version>2.7.3</spring.boot.version>
         <mybatis.starter.version>2.2.2</mybatis.starter.version>
     </properties>
@@ -29,6 +32,12 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
 
             <dependency>
