@@ -2,6 +2,7 @@ package org.ohx.studymybatis.dal.model.dataobject;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  * @date 2022/5/9
  */
 @Data
-public class UserDO {
+public class UserDO implements Serializable {
     private Long id;
 
     private String username;
