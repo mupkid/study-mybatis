@@ -8,6 +8,16 @@
 
 ## 入门
 
+## MyBatis 配置文件
+
+### mappers 标签
+
+mappers 标签用来指明 XML 映射文件的路径。
+
+4. package
+
+使用这种方式要求程序打包后接口与 XML 映射文件在相同的路径下，且文件名相同，因此并不十分推荐。
+
 ## MyBatis 缓存
 
 ### MyBatis 一级缓存
