@@ -8,13 +8,6 @@
 
 ## 入门
 
-### Mapper扫描
-有两种方法，一是在启动类上加上`@MapperScan`注解，扫描 Mapper 文件夹。
-
-
-
-
-
 ## MyBatis 缓存
 
 ### MyBatis 一级缓存
@@ -41,7 +34,7 @@ MyBatis 的二级缓存默认是不开启的，需要自行配置。
 1. 在核心配置文件中，设置全局配置属性 cacheEnabled = "true"，这个属性默认为 true，因此可以跳过。
 2. 在映射文件中设置标签\<cache/>
 
-3. 二级缓存必须在 SqlSession 关闭或提交之后才有效。
+3. 二级缓存必须在 SqlSession 关闭或提交之后才有效。注意：不是事务提交。
 
 4. 查询的数据所转换的实体类类型必须实现`Serializable` 接口。
 
@@ -77,6 +70,8 @@ SqlSession 关闭之后，一级缓存中的数据会写入二级缓存。
 [mybatis-ehcache 文档](https://mybatis.org/ehcache-cache/index.html)
 
 只能代替二级缓存，不能代替一级缓存。
+
+了解就好，一般不用。
 
 EHCache 配置说明。
 

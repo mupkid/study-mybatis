@@ -45,6 +45,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!-- 日志使用 SLF4J + Log4J2-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
