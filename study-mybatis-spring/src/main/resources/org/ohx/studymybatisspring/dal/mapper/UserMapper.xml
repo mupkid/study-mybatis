@@ -2,9 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.ohx.studymybatis.dal.mapper.UserMapper">
-    <!-- 二级缓存，使用 EHCache-->
-    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+<mapper namespace="org.ohx.studymybatisspring.dal.mapper.UserMapper">
 
     <resultMap id="userMap" type="org.ohx.studymybatisspring.dal.model.dataobject.UserDO">
         <id property="id" column="id"/>
