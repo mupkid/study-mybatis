@@ -1,6 +1,6 @@
 # MyBatis-Plus 的学习笔记
 
-[MyBatis-Plus官网]([MyBatis-Plus (baomidou.com)](https://baomidou.com/))
+[MyBatis-Plus官网](https://baomidou.com/)
 
 ## 入门
 
