@@ -13,6 +13,7 @@ import javax.sql.DataSource;
  * 使用{@link PropertySource}加载.properties文件，这个注解要放在能被{@link ComponentScan}扫描到的类上，
  * 相当于&lt;context:property-placeholder&gt;标签。
  * 也可以写一个空类加上专门用{@link PropertySource}注解所有的.properties文件。
+ * <p>
  * 使用{@link Value}注解从.properties文件中获取参数
  *
  * @author mudkip

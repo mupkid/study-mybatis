@@ -53,7 +53,8 @@
 
     <!-- 所有的 mapper.xml 文件-->
     <mappers>
-        <!-- 使用这种方式要求程序打包后接口与XML文件在相同的路径下，且文件名相同，因此很不推荐 -->
+        <!-- 指定包路径，扫描里面所有带有@Mapper注解的类 -->
+        <!-- 使用这种方式要求程序打包后接口与XML文件在相同的路径下，且文件名相同 -->
         <package name="org.ohx.studymybatis.dal.mapper"/>
     </mappers>
 </configuration>
